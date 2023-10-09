@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP-Tracer🐝</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+  </head>
+  <body>
+    <main>
+      <div class="upper-box">
+        <div class="upper-box-inital">
+      <header>IP Address Tracker</header>
+      <form>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          placeholder="Enter IP Address"
+        />
+        <input type="submit" value="Search" id="button-search"/>
+      </form>
+      </div>
+      <div class="info-box">
+        <div>
+          <p class="info-box-para">IP Address</p>
+          <h3 class="info-box-head" id="ip-address">8.8.8.8</h3>
+        </div>
+        <div>
+          <p class="info-box-para">Location</p>
+          <h3 class="info-box-head" id="location">Nishat</h3>
+        </div>
+        <div>
+          <p class="info-box-para">TimeZone</p>
+          <h3 class="info-box-head" id="time-zone">GST</h3>
+        </div>
+        <div>
+          <p class="info-box-para">ISP</p>
+          <h3 class="info-box-head" id="isp">Indian</h3>
+        </div>
+      </div>
+      </div>
+      <div class="lower-box">
+        <div id="map">
+          
+        </div>
+      </div>
+      </main>
+    </main>
+    <script src="scripts.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+:root {
+  very-dark-gray: hsl(0, 0%, 17%);
+  dark-gray: hsl(0, 0%, 59%);
+}
+* {
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  padding: 0%;
+}
+header {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  padding: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upper-box {
+  display: flex;
+  flex-direction: column;
+  background-image: url("images/pattern-bg-desktop.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.upper-box-inital {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
+}
+
+header {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.info-box {
+  position: relative;
+  top: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  width: 70%;
+  margin: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  z-index: 1;
+}
+.info-box-para {
+  font-size: 20px;
+  font-weight: bold; /* Make the paragraph text bold */
+  color: #333;
+}
+.info-box-head {
+  font-size: 1rem; /* Increase the font size of the headings */
+  color: #555;
+}
+
+#map {
+  height: 40rem;
+  z-index: 0;
+  overflow-y: hidden;
+}
+.lower-box {
+  flex-grow: 1;
+}
+
+/* Style the form container */
+form {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  gap: 10px;
+  /* background-color: #f4f4f4; */
+  padding: 20px;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+/* Style the input field */
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 600px) {
+  form {
+    width: 90%;
+  }
+}
