@@ -43,7 +43,6 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 2px solid green;
 }
 
 header {
@@ -56,24 +55,28 @@ header {
   top: 4rem;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 7rem;
+  gap: 4rem;
   background-color: white;
   border-radius: 1.5rem;
-  width: 70%;
+  max-width: 80%;
   margin: auto;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  padding: 2rem;
 }
 .info-box-para {
   font-size: 20px;
-  font-weight: bold; /* Make the paragraph text bold */
+  font-weight: bold;
   color: #333;
+  text-align: center;
 }
 .info-box-head {
-  font-size: 1rem; /* Increase the font size of the headings */
+  font-size: 1rem;
   color: #555;
+  text-align: center;
 }
 
 #map {
@@ -85,19 +88,16 @@ header {
   flex-grow: 1;
 }
 
-/* Style the form container */
 form {
   display: flex;
-  /* flex-direction: column; */
+
   align-items: center;
   gap: 10px;
-  /* background-color: #f4f4f4; */
+
   padding: 20px;
   border-radius: 10px;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
-/* Style the input field */
 input[type="text"] {
   padding: 10px;
   border: 1px solid #ccc;
@@ -106,7 +106,6 @@ input[type="text"] {
   width: 100%;
 }
 
-/* Style the submit button */
 input[type="submit"] {
   background-color: #007bff;
   color: #fff;
@@ -126,5 +125,11 @@ input[type="submit"]:hover {
 @media (max-width: 600px) {
   form {
     width: 90%;
+  }
+  .info-box {
+    flex-wrap: wrap;
+    gap: 3rem;
+    top: 2rem;
+    max-width: 50%;
   }
 }

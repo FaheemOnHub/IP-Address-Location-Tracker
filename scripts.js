@@ -13,7 +13,37 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
+//Automatically Fetch User-Data
+const fetchUserIPdata = function () {
+  fetch("https://ipapi.co/json/")
+    .then((res) => res.json())
+    .then((result) => {
+      console.log(result);
+      renderData_auto(result);
+      leafed_auto(result);
+    });
+};
+window.addEventListener("load", fetchUserIPdata);
+const renderData_auto = function (result) {
+  searchInput.value = result.ip;
+  ipAddressElement.innerText = result.ip;
+  locationElement.innerText = `${result.region},${result.city},${result.country}`;
+  timeZoneElement.innerText = `${result.utc_offset} , ${result.timezone}`;
+  ispElement.innerText = result.org;
+};
 
+const leafed_auto = function (result) {
+  map.setView([result.latitude, result.longitude], 13);
+  var marker = L.marker([result.latitude, result.longitude]).addTo(map);
+  var circle = L.circle([result.latitude, result.longitude], {
+    color: "red",
+    fillColor: "#f03",
+    fillOpacity: 0.5,
+    radius: 500,
+  }).addTo(map);
+  marker.bindPopup("<b>You are Here!").openPopup();
+};
+//Automatically Fetch User-Data
 const fetchIPdata = function () {
   const inputValue = searchInput.value;
   //   console.log(inputValue);
