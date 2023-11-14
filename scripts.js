@@ -43,6 +43,21 @@ const leafed_auto = function (result) {
   }).addTo(map);
   marker.bindPopup("<b>You are Here!").openPopup();
 };
+
+// Function to display toast messages
+const showToast = function (message) {
+  const toastContainer = document.getElementById("toast-container");
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+};
+
 //Automatically Fetch User-Data
 const fetchIPdata = function () {
   const inputValue = searchInput.value;
@@ -50,11 +65,19 @@ const fetchIPdata = function () {
   fetch(
     `https://geo.ipify.org/api/v2/country,city?apiKey=at_dM3QxViBz1x1GNAVqqu4RKglkFTYi&ipAddress=${inputValue}`
   )
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Invalid IP address");
+      }
+      return res.json();
+    })
     .then((result) => {
       renderData(result);
       leafed(result);
-    });
+    }).catch((error) => {
+      console.error(error); // Log the error for debugging
+      showToast(error.message);
+    });;
 };
 const renderData = function (result) {
   ipAddressElement.innerText = result.ip;
@@ -62,10 +85,12 @@ const renderData = function (result) {
   timeZoneElement.innerText = result.location.timezone;
   ispElement.innerText = result.isp;
 };
+
 btn.addEventListener("click", function (e) {
   e.preventDefault();
   fetchIPdata();
 });
+
 const leafed = function (result) {
   map.setView([result.location.lat, result.location.lng], 13);
   var marker = L.marker([result.location.lat, result.location.lng]).addTo(map);
