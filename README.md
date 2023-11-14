@@ -65,6 +65,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contributors
 -[FaheemOnHub](https://github.com/FaheemOnHub)
+-[PG-257811](https://github.com/PG-257811)
 
 Feel free to contribute to the project by opening issues or submitting pull requests!
 
