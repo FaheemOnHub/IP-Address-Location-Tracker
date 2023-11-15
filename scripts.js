@@ -74,10 +74,11 @@ const fetchIPdata = function () {
     .then((result) => {
       renderData(result);
       leafed(result);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.error(error); // Log the error for debugging
       showToast(error.message);
-    });;
+    });
 };
 const renderData = function (result) {
   ipAddressElement.innerText = result.ip;
@@ -101,4 +102,12 @@ const leafed = function (result) {
     radius: 500,
   }).addTo(map);
   marker.bindPopup("<b>You are Here!").openPopup();
+};
+
+// Function to toggle the dark mode
+const toggleDarkMode = () => {
+  var element = document.getElementById("darkModeToggle");
+  element.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode");
+  });
 };
