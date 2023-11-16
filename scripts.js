@@ -70,6 +70,14 @@ const renderData_auto = function (result) {
 const fetchIPdata = function () {
   const inputValue = searchInput.value;
 
+  const loadingSpinner = document.getElementById("loading-spinner");
+
+  // Hide search button and show loading spinner
+  btn.style.display = "none";
+  loadingSpinner.style.display = "block";
+
+  //   console.log(inputValue);
+
   fetch(
     `https://geo.ipify.org/api/v2/country,city?apiKey=at_dM3QxViBz1x1GNAVqqu4RKglkFTYi&ipAddress=${inputValue}`
   )
@@ -80,10 +88,21 @@ const fetchIPdata = function () {
       return res.json();
     })
     .then((result) => {
+      // Hide loading spinner on successful response and show search button
+      loadingSpinner.style.display = "none";
+      btn.style.display = "inline-block";
+
+      // Hide loading spinner on successful response
+      loadingSpinner.style.display = "none";
+
       renderData(result);
       leafed(result);
-    })
-    .catch((error) => {
+
+    }).catch((error) => {
+      // Hide loading spinner on error and show search button
+      loadingSpinner.style.display = "none";
+      btn.style.display = "inline-block";
+
       console.error(error); // Log the error for debugging
       showToast(error.message);
     });
