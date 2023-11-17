@@ -13,6 +13,39 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
+
+let marker; // Declare marker globally
+let circle; // Declare circle globally
+
+// Function to remove existing marker and circle
+const removeMarkerAndCircle = function () {
+  if (marker) {
+    map.removeLayer(marker);
+  }
+  if (circle) {
+    map.removeLayer(circle);
+  }
+};
+
+// Function to add marker and circle
+const addMarkerAndCircle = function (lat, lng) {
+  marker = L.marker([lat, lng]).addTo(map);
+  circle = L.circle([lat, lng], {
+    color: "red",
+    fillColor: "#f03",
+    fillOpacity: 0.5,
+    radius: 500,
+  }).addTo(map);
+  marker.bindPopup("<b>You are Here!").openPopup();
+};
+
+//Automatically Fetch User-Data
+const leafed_auto = function (result) {
+  removeMarkerAndCircle(); // Remove existing marker and circle
+  map.setView([result.latitude, result.longitude], 13);
+  addMarkerAndCircle(result.latitude, result.longitude); // Add new marker and circle
+};
+
 //Automatically Fetch User-Data
 const fetchUserIPdata = function () {
   fetch("https://ipapi.co/json/")
@@ -23,7 +56,9 @@ const fetchUserIPdata = function () {
       leafed_auto(result);
     });
 };
+
 window.addEventListener("load", fetchUserIPdata);
+
 const renderData_auto = function (result) {
   searchInput.value = result.ip;
   ipAddressElement.innerText = result.ip;
@@ -32,35 +67,9 @@ const renderData_auto = function (result) {
   ispElement.innerText = result.org;
 };
 
-const leafed_auto = function (result) {
-  map.setView([result.latitude, result.longitude], 13);
-  var marker = L.marker([result.latitude, result.longitude]).addTo(map);
-  var circle = L.circle([result.latitude, result.longitude], {
-    color: "red",
-    fillColor: "#f03",
-    fillOpacity: 0.5,
-    radius: 500,
-  }).addTo(map);
-  marker.bindPopup("<b>You are Here!").openPopup();
-};
-
-// Function to display toast messages
-const showToast = function (message) {
-  const toastContainer = document.getElementById("toast-container");
-
-  const toast = document.createElement("div");
-  toast.classList.add("toast");
-  toast.textContent = message;
-  toastContainer.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  }, 3000);
-};
-
-//Automatically Fetch User-Data
 const fetchIPdata = function () {
   const inputValue = searchInput.value;
+
   const loadingSpinner = document.getElementById("loading-spinner");
 
   // Hide search button and show loading spinner
@@ -68,6 +77,7 @@ const fetchIPdata = function () {
   loadingSpinner.style.display = "block";
 
   //   console.log(inputValue);
+
   fetch(
     `https://geo.ipify.org/api/v2/country,city?apiKey=at_dM3QxViBz1x1GNAVqqu4RKglkFTYi&ipAddress=${inputValue}`
   )
@@ -87,6 +97,7 @@ const fetchIPdata = function () {
 
       renderData(result);
       leafed(result);
+
     }).catch((error) => {
       // Hide loading spinner on error and show search button
       loadingSpinner.style.display = "none";
@@ -94,8 +105,9 @@ const fetchIPdata = function () {
 
       console.error(error); // Log the error for debugging
       showToast(error.message);
-    });;
+    });
 };
+
 const renderData = function (result) {
   ipAddressElement.innerText = result.ip;
   locationElement.innerText = `${result.location.region},${result.location.city},${result.location.country}`;
@@ -110,12 +122,20 @@ btn.addEventListener("click", function (e) {
 
 const leafed = function (result) {
   map.setView([result.location.lat, result.location.lng], 13);
-  var marker = L.marker([result.location.lat, result.location.lng]).addTo(map);
-  var circle = L.circle([result.location.lat, result.location.lng], {
-    color: "red",
-    fillColor: "#f03",
-    fillOpacity: 0.5,
-    radius: 500,
-  }).addTo(map);
-  marker.bindPopup("<b>You are Here!").openPopup();
+  removeMarkerAndCircle(); // Remove existing marker and circle
+  addMarkerAndCircle(result.location.lat, result.location.lng); // Add new marker and circle
+};
+
+// Function to display toast messages
+const showToast = function (message) {
+  const toastContainer = document.getElementById("toast-container");
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
 };
