@@ -155,7 +155,7 @@ input[type="submit"]:hover {
 }
 
 /* Add media queries for responsiveness */
-@media (max-width: 600px) {
+@media (min-width: 600px) {
   form {
     width: 90%;
   }
