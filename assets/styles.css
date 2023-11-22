@@ -56,27 +56,45 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
   background-color: white;
   border-radius: 1.5rem;
-  max-width: 80%;
+  width: 90%;
   margin: auto;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1;
   padding: 2rem;
 }
-.info-box-para {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
+
+.info-box div {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 1rem;
+
+  flex: 1;
+
+  border-right: 1px solid #ccc;
 }
+
+.info-box div:last-child {
+  border-right: none;
+}
+
+.info-box-para {
+  font-size: 15px;
+  font-weight: bold;
+  color: #555;
+  text-align: left;
+  margin: 0;
+}
+
 .info-box-head {
   font-size: 1rem;
-  color: #555;
-  text-align: center;
+  color: #333;
+  text-align: left;
 }
 
 #map {
@@ -121,10 +139,13 @@ input[type="text"] {
   z-index: 2; /* Ensure the spinner is on top */
 }
 
-
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .toast {
@@ -159,10 +180,15 @@ input[type="submit"]:hover {
   form {
     width: 90%;
   }
+
   .info-box {
     flex-wrap: wrap;
     gap: 3rem;
     top: 2rem;
-    max-width: 50%;
+    max-width: 90%;
+  }
+  
+  .info-box div {
+    border-right: none !important;
   }
 }
